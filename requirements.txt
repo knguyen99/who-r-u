@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-multipart
+deepface
+chromadb
+scipy
+h5py
+pandas
+opencv-python
+tqdm
