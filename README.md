@@ -34,12 +34,18 @@ Before searching, you need to populate the local database with faces. We use the
 python download_imdb_wiki.py
 ```
 
-### 4. How the Face Search Works (Indexing & Querying)
+### 4. Preprocess the Dataset
+After downloading, process the raw image files and `.mat` metadata into an optimized HDF5 database to prevent disk I/O bottlenecks during model training.
+```bash
+python data_processing/preprocess_to_hdf5.py
+```
+
+### 5. How the Face Search Works (Indexing & Querying)
 1. **Ingestion & Indexing:** We parse the `.mat` metadata files included in the dataset. DeepFace extracts a 128-dimensional embedding for each face. 
 2. **Vector Storage:** These embeddings, along with the person's name and metadata, are stored in ChromaDB (running locally).
 3. **Similarity Search:** When you upload an image to the frontend, FastAPI passes it to DeepFace to generate an embedding. We then query ChromaDB for the closest vector using Cosine Similarity, returning the nearest matches in milliseconds.
 
-### 5. Run the Servers
+### 6. Run the Servers
 **Start the FastAPI Backend:**
 ```bash
 cd backend
