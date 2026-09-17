@@ -3,8 +3,10 @@ uvicorn
 python-multipart
 deepface
 chromadb
-scipy
+scipy>=1.13.1
 h5py
-pandas
+pandas>=2.2.2
 opencv-python
 tqdm
+bottleneck>=1.4.0
+numexpr>=2.10.2

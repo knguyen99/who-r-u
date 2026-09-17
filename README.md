@@ -9,6 +9,17 @@ A full-stack, local facial recognition search engine. This project ingests publi
 *   **Vector DB:** ChromaDB for Cosine Similarity matching.
 *   **Dataset:** IMDB-WIKI Face-Only Dataset (over 500k images with metadata).
 
+## 📋 Planning & Roadmap
+
+### Data Preprocessing Strategy
+To prevent severe disk I/O bottlenecks when reading 500,000+ tiny JPEG images, we process the raw data into a single, uncompressed **HDF5 Database**. This involves parsing MATLAB metadata to convert datenums to standard Unix timestamps, filtering out images with multiple faces or low confidence scores, and uniformly resizing images to `224x224`. This guarantees blazing-fast sequential reads during model embedding.
+
+### Epic Checklist
+- [x] **Dataset Acquisition:** Scripts to fetch and extract the massive IMDB-Wiki face dataset.
+- [x] **Data Preprocessing Pipeline:** Clean raw data and compile 500k+ images into an optimized HDF5 database.
+- [ ] **Vector Database Ingestion:** Batch process the HDF5 database through DeepFace to generate 128D embeddings and index them into ChromaDB.
+- [ ] **Backend Search API:** Build FastAPI endpoints for real-time image upload, feature extraction, and nearest-neighbor vector matching.
+- [ ] **Frontend Interface:** Develop a React/Vite UI with drag-and-drop support to present visual search results and metadata.
 
 ## 🚀 Local Setup Instructions
 
@@ -35,7 +46,7 @@ python download_imdb_wiki.py
 ```
 
 ### 4. Preprocess the Dataset
-After downloading, process the raw image files and `.mat` metadata into an optimized HDF5 database to prevent disk I/O bottlenecks during model training.
+After downloading, process the raw image files and `.mat` metadata into an optimized HDF5 database.
 ```bash
 python data_processing/preprocess_to_hdf5.py
 ```
