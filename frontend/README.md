@@ -22,24 +22,6 @@ Create a production build with `npm run build`. Use `npm run preview` to serve t
 
 Selected images stay in the browser. This frontend does not upload them, send search requests, or perform face recognition. Resetting the selection clears the preview.
 
-## Navigation
-
-The default `#home` view includes an original static face-contour SVG and a link to Search. Home, `#search`, `#how-it-works`, `#dataset`, and `#source` support direct links and browser history. Page content stays mounted when switching views, preserving the selected photo.
-
-Above 1024px, Home, Search, How it works, Dataset, and GitHub each have a full-height tab attached to their panel. They form an accordion in that fixed order: the selected tab and every tab before it sit on the left, while every tab after it stays on the right. Home follows the same rules as the other tabs. The browser window owns scrolling; panels have no separate scrollbars.
-
-At widths of 1024px and below, **Menu** opens a full-height vertical menu. Selecting a view closes it; Escape closes it and returns focus to the Menu button.
-
-## Appearance
-
-The interface uses a monochrome palette, readable title spacing, and rule-separated sections, without decorative numbering or labels above page titles. The Face search description sits below its title, matching the Dataset layout. Home uses nine enlarged face contours. The GitHub panel includes an original animated SVG made from circles, ellipses, and connecting lines; it stops for reduced-motion preferences. Light and dark themes use the same layout.
-
-- The theme defaults to the operating system’s `prefers-color-scheme` setting and follows live changes while no manual override is set.
-- One icon-only sun/moon button stays fixed at the top left, independent of the panels, and switches between light and dark; there is no separate Auto button.
-- A manual override is saved for future visits. Toggling back to the operating system’s current appearance removes the override and resumes system tracking.
-
-The saved theme preference uses the `localStorage` key `who-r-u-theme`.
-
 ## Backend integration
 
 `backend/main.py` and `backend/db.py` are currently empty, and `backend/face_engine.py` only imports DeepFace. There is no search API to call yet. The skeleton deliberately does not invent a working endpoint.
