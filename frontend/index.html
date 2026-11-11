@@ -1,13 +1,32 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f3f3ef" />
+  <script>
+    (() => {
+      let preference = 'system'
+      try {
+        const saved = localStorage.getItem('who-r-u-theme')
+        if (saved === 'light' || saved === 'dark') preference = saved
+      } catch {}
+      const systemDark = typeof matchMedia === 'function' && matchMedia('(prefers-color-scheme: dark)').matches
+      const dark = preference === 'dark' || (preference === 'system' && systemDark)
+      document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+      document.querySelector('meta[name="theme-color"]').content = dark ? '#0e0e0e' : '#f3f3ef'
+    })()
+  </script>
+  <meta name="description"
+    content="who r u — search the local IMDB–WIKI face dataset using a photo." />
+  <title>who r u — Face Search</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>
